@@ -47,7 +47,7 @@ primitive sphere
     O= 0 6 -1.5
     R= 0.5
     color= 1 1 1
-    texture= Raytracing_Implementation/marble.bmp
+    texture= src/marble.bmp
     De= 0 0 1
     Dc= 0 1 0
     diff= 0.45
@@ -64,7 +64,7 @@ primitive plane
     diff= 0.3
     refl= 0.7
     drefl= 0.15
-    texture= Raytracing_Implementation/floor.bmp
+    texture= src/floor.bmp
     Dx= 8 0 0
     Dy= 0 8 0
     blur= exp

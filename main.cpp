@@ -11,11 +11,11 @@
 
 #include <omp.h>
 
-#include "Raytracing_Implementation/raytracer.h"
+#include "src/raytracer.h"
 
 int main()
 {
-    const char * const inputFile = "Raytracing_Implementation/scene3.txt";
+    const char * const inputFile = "src/scene3.txt";
     const char * const outputFile = "Raytracer_output3.bmp";
 
     Raytracer raytracer;

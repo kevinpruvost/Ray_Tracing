@@ -38,11 +38,11 @@ add_subdirectory("lib")
 
 file (GLOB RAYTRACER_SOURCES
     main.cpp
-    Raytracing_Implementation/*.cpp
+    src/*.cpp
 )
 
 file (GLOB RAYTRACER_HEADERS
-    Raytracing_Implementation/*.hpp
+    src/*.hpp
 )
 
 add_executable(RayTracer
@@ -51,7 +51,7 @@ add_executable(RayTracer
 )
 
 # Linking libraries
-target_link_libraries(RayTracer opengl32 glad glfw glm ImGui SOIL freetype OpenMP::OpenMP_CXX)
+target_link_libraries(RayTracer opengl32 glad glfw glm OpenMP::OpenMP_CXX)
 
 # Profiling
 set_target_properties(RayTracer PROPERTIES LINK_FLAGS "/PROFILE")
