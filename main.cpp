@@ -15,15 +15,32 @@
 
 int main()
 {
-    const char * const inputFile = "src/scene3.txt";
-    const char * const outputFile = "Raytracer_output3.bmp";
+    const char * const inputFile[5] =
+    {
+        "src/scene1.txt",
+        "src/scene2.txt",
+        "src/scene3.txt",
+        "src/scene4.txt",
+        "src/scene5.txt",
+    };
+    const char * const outputFile[5] =
+    {
+        "Raytracer_output1.bmp",
+        "Raytracer_output2.bmp",
+        "Raytracer_output3.bmp",
+        "Raytracer_output4.bmp",
+        "Raytracer_output5.bmp",
+    };
 
-    Raytracer raytracer;
-    raytracer.SetInput(inputFile);
-    raytracer.SetOutput(outputFile);
+    for (int i = 0; i < 5; ++i)
+    {
+        Raytracer raytracer;
+        raytracer.SetInput(inputFile[i]);
+        raytracer.SetOutput(outputFile[i]);
 
-    raytracer.Run();
+        raytracer.Run();
 
-    std::cout << "Output file saved at '" << std::filesystem::absolute(outputFile) << "'." << std::endl;
+        std::cout << "Output file saved at '" << std::filesystem::absolute(outputFile[i]) << "'." << std::endl;
+    }
     return 0;
 }

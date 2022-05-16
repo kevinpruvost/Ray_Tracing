@@ -277,34 +277,34 @@ void Raytracer::Run()
     omp_set_num_threads(omp_get_num_procs());
 #endif
 
-#ifdef _OPENMP
-#pragma omp parallel for
-#endif
-    //for ( int i = 0 ; i < H ; std::cout << "Sampling:   " << ++i << "/" << H << std::endl )
-    for (int i = 0; i < H; i++) {
-        for (int j = 0; j < W; j++) {
-            Vector3 ray_V = camera->Emit(i, j);
-            Color color = RayTracing(ray_O, ray_V, 1, &sample[i][j]);
-            camera->SetColor(i, j, color);
-        }
-    }
-
 //#ifdef _OPENMP
 //#pragma omp parallel for
 //#endif
-//    //for ( int i = 0 ; i < H ; std::cout << "Resampling: " << ++i << "/" << H << std::endl )
+//    //for ( int i = 0 ; i < H ; std::cout << "Sampling:   " << ++i << "/" << H << std::endl )
 //    for (int i = 0; i < H; i++) {
 //        for (int j = 0; j < W; j++) {
-//            Color color;
-//            for (int r = -NUM_RESAMPLE; r <= NUM_RESAMPLE; r++) {
-//                for (int c = -NUM_RESAMPLE; c <= NUM_RESAMPLE; c++) {
-//                    Vector3 ray_V = camera->Emit(i + (double)r / (NUM_RESAMPLE * 2 + 1), j + (double)c / (NUM_RESAMPLE * 2 + 1));
-//                    color += RayTracing(ray_O, ray_V, 1, nullptr) / pow((NUM_RESAMPLE * 2 + 1), 2);
-//                }
-//            }
+//            Vector3 ray_V = camera->Emit(i, j);
+//            Color color = RayTracing(ray_O, ray_V, 1, &sample[i][j]);
 //            camera->SetColor(i, j, color);
 //        }
 //    }
+
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+    //for ( int i = 0 ; i < H ; std::cout << "Resampling: " << ++i << "/" << H << std::endl )
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < W; j++) {
+            Color color;
+            for (int r = -NUM_RESAMPLE; r <= NUM_RESAMPLE; r++) {
+                for (int c = -NUM_RESAMPLE; c <= NUM_RESAMPLE; c++) {
+                    Vector3 ray_V = camera->Emit(i + (double)r / (NUM_RESAMPLE * 2 + 1), j + (double)c / (NUM_RESAMPLE * 2 + 1));
+                    color += RayTracing(ray_O, ray_V, 1, nullptr) / pow((NUM_RESAMPLE * 2 + 1), 2);
+                }
+            }
+            camera->SetColor(i, j, color);
+        }
+    }
 
     for (int i = 0; i < H; i++) {
         delete[] sample[i];
